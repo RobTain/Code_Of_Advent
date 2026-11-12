@@ -5,12 +5,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
-public class Day04 {
+public class Day06 {
 	
 	public static void main(String[] args) {
 		Path filePath = Path.of("Input2016_06.txt");
@@ -47,7 +45,6 @@ public class Day04 {
 			int[] anzahl = new int[256];
 			Arrays.fill(anzahl, 0);
 			for (int j = 0; j < tmp.length(); j++) {
-				char c = tmp.charAt(j);
 				anzahl[(int) tmp.charAt(j)]++;
 			}
 
@@ -89,7 +86,6 @@ public class Day04 {
 			int[] anzahl = new int[256];
 			Arrays.fill(anzahl, 0);
 			for (int j = 0; j < tmp.length(); j++) {
-				char c = tmp.charAt(j);
 				anzahl[(int) tmp.charAt(j)]++;
 			}
 			
