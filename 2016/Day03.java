@@ -12,28 +12,22 @@ public class Day03 {
 	public static void main(String[] args) {
 		Path filePath = Path.of("Input2016_03.txt");
 		List<String> input = new LinkedList<String>();
-		int solution01 = 0;
-		int solution02 = 0;
 
 		try (BufferedReader reader = Files.newBufferedReader(filePath)) {
 			String line;
 			while ((line = reader.readLine()) != null) {
 				input.add(line);
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		solution01 = calculatePossibleTriangles(input);
-		solution02 = calculateVerticalPossibleTriangles(input);
-		
-		System.out.println("Ergebnis Teil 1: " + solution01);
-		System.out.println("Ergebnis Teil 2: " + solution02);
+		} catch (IOException e) { e.printStackTrace(); }
+
+		System.out.println("Ergebnis Teil 1: " + calculatePossibleTriangles(input));
+		System.out.println("Ergebnis Teil 2: " + calculateVerticalPossibleTriangles(input));
 	}
 
 	private static int calculateVerticalPossibleTriangles(List<String> input) {
 		List<String> verticalInput = new LinkedList<String>();
 		
+		// Matrix anpassen
 		for (int i = 0; i < input.size(); i=i+3) {
 			String[] tmp0 = input.get(i).trim().split("\\s+");
 			String[] tmp1 = input.get(i+1).trim().split("\\s+");
