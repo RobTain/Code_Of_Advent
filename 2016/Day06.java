@@ -24,46 +24,48 @@ public class Day06 {
 			e.printStackTrace();
 		}
 		
-		String solution01 = getHighestLetterCount(sortVertical(input));
-		String solution02 = getLowestLetterCount(sortVertical(input));
 		
-		
-		System.out.println("Ergebnis Teil 1: " + solution01);
-		System.out.println("Ergebnis Teil 2: " + solution02);
+		System.out.println("Ergebnis Teil 1: " + getHighestLetterCount(sortVertical(input)));
+		System.out.println("Ergebnis Teil 2: " + getLowestLetterCount(sortVertical(input)));
 	}
-	
 	
 
 	private static String getHighestLetterCount(String[] strings) {
 		String result = ""; 
 		
-		// Vorkommen von Buchstaben berechnen
-		for (int i = 0; i < strings.length; i++) {
-			String tmp = strings[i];
-			
-			// Vorkommen der Buchstaben zählen
-			int[] anzahl = new int[256];
-			Arrays.fill(anzahl, 0);
-			for (int j = 0; j < tmp.length(); j++) {
-				anzahl[(int) tmp.charAt(j)]++;
-			}
-
-			// Größten Buchstaben finden
+		for (int[] occurance : occuranceLetters(strings)) {
 			int max = 0;
 			char c = 0;
-		    for (int j = 0; j < anzahl.length; j++) {
-		            if (anzahl[j] > max) {
-		                max = anzahl[j];
-		                c = (char) j;
+			for (int i = 0; i < occurance.length; i++) {
+				if (occurance[i] > max) {
+		                max = occurance[i];
+		                c = (char) i;
 		            }
 		        }
-		    result += c;
-		}	
+			result += c;
+		}
 	
 		return result;
 	}
 
 
+	private static String getLowestLetterCount(String[] strings) {
+		String result = ""; 
+		
+		for (int[] occurance : occuranceLetters(strings)) {
+			int min = Integer.MAX_VALUE;
+			char c = 0;
+			for (int i = 0; i < occurance.length; i++) {
+				if (occurance[i] < min && occurance[i] > 0) {
+		                min = occurance[i];
+		                c = (char) i;
+		            }
+		        }
+			result += c;
+		}
+		return result;
+	}
+	
 	private static String[] sortVertical(List<String> input) {
 		String[] vertical = new String[input.getFirst().length()];
 		Arrays.fill(vertical, "");
@@ -74,34 +76,21 @@ public class Day06 {
 		}
 		return vertical;
 	}
-
-	private static String getLowestLetterCount(String[] strings) {
-		String result = ""; 
+	
+	private static List<int[]> occuranceLetters(String[] strings) {
+		List<int[]> results = new LinkedList<int[]>();
 		
-		// Vorkommen von Buchstaben berechnen
 		for (int i = 0; i < strings.length; i++) {
 			String tmp = strings[i];
 			
-			// Vorkommen der Buchstaben zählen
 			int[] anzahl = new int[256];
 			Arrays.fill(anzahl, 0);
 			for (int j = 0; j < tmp.length(); j++) {
 				anzahl[(int) tmp.charAt(j)]++;
 			}
-			
-			// Größten Buchstaben finden
-			int min = Integer.MAX_VALUE;
-			char c = 0;
-		    for (int j = 0; j < anzahl.length; j++) {
-		            if (anzahl[j] < min && anzahl[j] > 0) {
-		                min = anzahl[j];
-		                c = (char) j;
-		            }
-		        }
-		    result += c;
-		}	
-	
-		return result;
+			results.add(anzahl);
+		}
+		return results;
 	}
 	
 }
