@@ -14,16 +14,12 @@ public class Day06 {
 		Path filePath = Path.of("Input2016_06.txt");
 		List<String> input = new LinkedList<String>();
 
-
 		try (BufferedReader reader = Files.newBufferedReader(filePath)) {
 			String line;
 			while ((line = reader.readLine()) != null) {
 				input.add(line);
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
+		} catch (IOException e) { e.printStackTrace(); }
 		
 		System.out.println("Ergebnis Teil 1: " + getHighestLetterCount(sortVertical(input)));
 		System.out.println("Ergebnis Teil 2: " + getLowestLetterCount(sortVertical(input)));
@@ -44,7 +40,6 @@ public class Day06 {
 		        }
 			result += c;
 		}
-	
 		return result;
 	}
 
@@ -92,5 +87,4 @@ public class Day06 {
 		}
 		return results;
 	}
-	
 }
